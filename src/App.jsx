@@ -5,6 +5,11 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
 import CoverLetter from './pages/CoverLetter';
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
+import Profile from './pages/Profile';
+import Subscription from './pages/Subscription';
+import PrivateRoute from './components/Auth/PrivateRoute';
 import './App.css';
 
 function App() {
@@ -13,9 +18,13 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/cover-letter" element={<CoverLetter />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/cover-letter" element={<PrivateRoute><CoverLetter /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/subscription" element={<PrivateRoute><Subscription /></PrivateRoute>} />
         </Routes>
       </Layout>
     </Router>

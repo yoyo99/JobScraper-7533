@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaLock, FaSpinner } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaSpinner, FaUser } from 'react-icons/fa';
 import { registerUser } from '../../services/auth';
 import Logo from '../../components/Layout/Logo';
 
@@ -10,6 +10,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -26,7 +27,7 @@ const Register = () => {
     setError('');
 
     try {
-      await registerUser(formData.email, formData.password);
+      await registerUser(formData.email, formData.password, formData.name);
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);
@@ -48,6 +49,22 @@ const Register = () => {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
+            <div>
+              <label htmlFor="name" className="sr-only">Full Name</label>
+              <div className="relative">
+                <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  className="appearance-none rounded-lg relative block w-full px-10 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="Full Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+            </div>
             <div>
               <label htmlFor="email" className="sr-only">Email address</label>
               <div className="relative">
@@ -133,3 +150,5 @@ const Register = () => {
     </div>
   );
 };
+
+export default Register;

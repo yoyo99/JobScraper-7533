@@ -14,7 +14,12 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     rollupOptions: {
-      external: ['openai']
+      external: [
+        'firebase/app',
+        'firebase/auth',
+        'firebase/firestore',
+        'openai'
+      ]
     }
   },
 });

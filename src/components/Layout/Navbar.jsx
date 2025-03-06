@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaBriefcase, FaUser, FaFileAlt } from 'react-icons/fa';
+import { FaBriefcase, FaUser, FaFileAlt, FaCrown } from 'react-icons/fa';
 
 const Navbar = () => {
   return (
@@ -10,10 +10,9 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <FaBriefcase className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-800">JobScraper</span>
+              <span className="text-xl font-bold text-gray-800">CareerCompass</span>
             </Link>
           </div>
-          
           <div className="flex items-center space-x-4">
             <Link to="/dashboard" className="text-gray-600 hover:text-primary-600">
               Dashboard
@@ -24,6 +23,9 @@ const Navbar = () => {
             <Link to="/cover-letter" className="text-gray-600 hover:text-primary-600">
               <FaFileAlt className="h-5 w-5" />
             </Link>
+            <Link to="/subscription" className="text-gray-600 hover:text-primary-600">
+              <FaCrown className="h-5 w-5" />
+            </Link>
             <Link to="/profile" className="p-2 text-gray-600 hover:text-primary-600">
               <FaUser className="h-6 w-6" />
             </Link>
@@ -33,5 +35,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;

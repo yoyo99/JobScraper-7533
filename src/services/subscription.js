@@ -1,4 +1,4 @@
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { doc, updateDoc, getDoc, increment } from 'firebase/firestore';
 import { db } from './firebase';
 import Stripe from 'stripe';
 
@@ -19,6 +19,19 @@ export const SUBSCRIPTION_LIMITS = {
     jobSearches: Infinity,
     coverLetters: Infinity,
     applications: Infinity,
+  }
+};
+
+export const getUserSubscription = async (userId) => {
+  try {
+    const userDoc = await getDoc(doc(db, 'users', userId));
+    if (userDoc.exists()) {
+      return userDoc.data().plan || 'free';
+    }
+    return 'free';
+  } catch (error) {
+    console.error('Error fetching subscription:', error);
+    return 'free';
   }
 };
 
